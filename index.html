@@ -103,7 +103,7 @@ function startApp() {
   digimonStorage = digimonContract.at(contractAddress);
 }
 function setValue() {
-  var newValue = document.getElementById('h1').value;
+  var newValue = document.getElementById('h1').val();
   alert(newValue);
   var txid
   digimonStorage.login(newValue, function(e,r){
