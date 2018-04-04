@@ -110,14 +110,13 @@
   var result;
   digimonStorage.get.call(newValue, function(err, res){
   	if (!err){
-  		alert("start");
-  		alert("res.s : " + res.s);
-  		result = parseInt(res.s);
+  		alert(res.s);
+  		result = Object.assign(res.s);
   		console.log(res.s);
   	}
   });
 
-  alert("result : " + result);
+  alert(result);
 }
 function logit(value){
 
