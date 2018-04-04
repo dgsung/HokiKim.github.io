@@ -1,5 +1,6 @@
 <html>
 <head>
+  <meta charset="UTF-8">
 <style type="text/css">
 body{background-color:#000000;}
 @font-face {
@@ -70,7 +71,7 @@ body{background-color:#000000;}
 		<br>
 		<div class="layer">
 			<!-- <img src="Digivice_tri_2.png" width = "640", height="640", style = "margin-left: auto; margin-right: auto; display: block;"/> -->
-			<textarea class="t1"> your name? </textarea>
+			<span class="t1"> your name? </span>
 			<input class="h1" type="text" name="text" maxlength="7">
 			<button class="b1" id="button1" type="text" name="text" onclick="setValue()" style="cursor:pointer">Log-in</button>
 			<script type="text/javascript" src="index.js"></script>
@@ -100,10 +101,6 @@ window.addEventListener('load', function() {
 function startApp() {
   digimonContract = web3.eth.contract(abi);
   digimonStorage = digimonContract.at(contractAddress);
-  document.getElementById('contractAddr').innerHTML = getLink(contractAddress);
-  web3.eth.getAccounts(function(e,r){
-    document.getElementById('accountAddr').innerHTML = getLink(r[0]);
-  });
 }
 function setValue() {
   var newValue = document.getElementById('h1').value;
