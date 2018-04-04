@@ -1,68 +1,68 @@
 <html>
 <head>
-  <meta charset="UTF-8">
-<style type="text/css">
-body{background-color:#000000;}
-@font-face {
-    font-family: ArcaMajora3-Bold;
-    src: url("ArcaMajora3-Bold.otf") format("opentype");
-    src: url("Digivolve.otf") format("opentype");
-}
-@font-face {
-    font-family: Digivolve;
-    src: url("Digivolve.otf") format("opentype");
-}
-.layer{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%, -50%);
-  background:url('Digivice_tri_2.png') no-repeat right center;
-  width: 640;
-  height: 640;
-}
-.layer .t1 {
-	position:absolute;
-	top:42%;
-	left:50%;
-	transform:translate(-50%, -50%);
-	background-color:transparent;
-	width : 180;
-	height : 50;
-	font-size : 13pt;
-	color: #ffffff;
-	font-family: 'Digivolve';
-	border-right:0px; border-top:0px; border-left:0px; border-bottom:0px;
-	text-align: center;
-}
-.layer .h1 {
-	position:absolute;
-	top:48%;
-	left:50%;
-	transform:translate(-50%, -50%);
-	background-color:transparent;
-	width : 150;
-	height : 50;
-	font-size : 20pt;
-	color: #ffffff;
-	font-family: 'Digivolve';
-	/*border-right:0px; border-top:0px; border-left:0px; border-bottom:1px solid #FFFFFF;*/
-	text-align: center;
-}
-.layer .b1 {
-	position:absolute;
-	top:57%;
-	left:50%;
-	transform:translate(-50%, -50%);
-	background-color:transparent;
-	width : 100;
-	height : 50;
-	font-size : 13pt;
-	color: #ffffff;
-	font-family: 'Digivolve';
-	border-right:0px; border-top:0px; border-left:0px; border-bottom:0px;/
-	text-align: center;
-}
+	<meta charset="UTF-8">
+	<style type="text/css">
+	body{background-color:#000000;}
+	@font-face {
+		font-family: ArcaMajora3-Bold;
+		src: url("ArcaMajora3-Bold.otf") format("opentype");
+		src: url("Digivolve.otf") format("opentype");
+	}
+	@font-face {
+		font-family: Digivolve;
+		src: url("Digivolve.otf") format("opentype");
+	}
+	.layer{
+		position:absolute;
+		top:50%;
+		left:50%;
+		transform:translate(-50%, -50%);
+		background:url('Digivice_tri_2.png') no-repeat right center;
+		width: 640;
+		height: 640;
+	}
+	.layer .t1 {
+		position:absolute;
+		top:42%;
+		left:50%;
+		transform:translate(-50%, -50%);
+		background-color:transparent;
+		width : 180;
+		height : 50;
+		font-size : 13pt;
+		color: #ffffff;
+		font-family: 'Digivolve';
+		border-right:0px; border-top:0px; border-left:0px; border-bottom:0px;
+		text-align: center;
+	}
+	.layer .h1 {
+		position:absolute;
+		top:48%;
+		left:50%;
+		transform:translate(-50%, -50%);
+		background-color:transparent;
+		width : 150;
+		height : 50;
+		font-size : 20pt;
+		color: #ffffff;
+		font-family: 'Digivolve';
+		/*border-right:0px; border-top:0px; border-left:0px; border-bottom:1px solid #FFFFFF;*/
+		text-align: center;
+	}
+	.layer .b1 {
+		position:absolute;
+		top:57%;
+		left:50%;
+		transform:translate(-50%, -50%);
+		background-color:transparent;
+		width : 100;
+		height : 50;
+		font-size : 13pt;
+		color: #ffffff;
+		font-family: 'Digivolve';
+		border-right:0px; border-top:0px; border-left:0px; border-bottom:0px;/
+		text-align: center;
+	}
 </style>
 </head>
 <body>
@@ -81,48 +81,45 @@ body{background-color:#000000;}
 <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
 <!-- script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script -->
 <script>
-var contractAddress = '0xba72182072d42a64256f9269459f881952339c40';
-var digimonContract;
-var digimonStorage;
-window.addEventListener('load', function() {
+	var contractAddress = '0xba72182072d42a64256f9269459f881952339c40';
+	var digimonContract;
+	var digimonStorage;
+	window.addEventListener('load', function() {
   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
   if (typeof web3 !== 'undefined') {
     // Use Mist/MetaMask's provider
     window.web3 = new Web3(web3.currentProvider);
-  } else {
-    console.log('No web3? You should consider trying MetaMask!')
+} else {
+	console.log('No web3? You should consider trying MetaMask!')
     // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
     window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-  }
+}
   // Now you can start your app & access web3 freely:
   startApp();
 });
-function startApp() {
-	digimonContract = web3.eth.contract([{"constant":false,"inputs":[{"name":"in_name","type":"string"}],"name":"login","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[{"name":"in_name","type":"string"}],"name":"get","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"say","type":"string"}],"name":"saying","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"in_name","type":"string"},{"indexed":false,"name":"flag","type":"uint8"}],"name":"GetEvent","type":"event"}]);
-
-
-  digimonStorage = digimonContract.at(contractAddress);
-}
-function setValue() {
-  var newValue = $(".layer .h1").val();
+	function startApp() {
+		digimonContract = web3.eth.contract([{"constant":false,"inputs":[{"name":"in_name","type":"string"}],"name":"login","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[{"name":"in_name","type":"string"}],"name":"get","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"say","type":"string"}],"name":"saying","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"in_name","type":"string"},{"indexed":false,"name":"flag","type":"uint8"}],"name":"GetEvent","type":"event"}]);
+		digimonStorage = digimonContract.at(contractAddress);
+	}
+	function setValue() {
+		var newValue = $(".layer .h1").val();
   // digimonStorage.get(newValue, function(e,r){
     // document.getElementById('result').innerHTML = 'Transaction id: ' + r + '<span id="pending" style="color:red;">(Pending)</span>';
     // txid = r;
   // });
-	var result;
-digimonStorage.get.call(newValue, function(err, res){
-   	if (!err){
-   	alert(res.s);
-	result = res.s
-    console.log(res.s);
+  var result;
+  digimonStorage.get.call(newValue, function(err, res){
+  	if (!err){
+  		alert(res.s);
+  		result = int(res.s);
+  		console.log(res.s);
+  	}
+  });
 
-   	}
-});
-	
-   		alert(result);
+  alert(result);
 }
-  function logit(value){
-      
-   }
+function logit(value){
+
+}
 </script>
 </html>
