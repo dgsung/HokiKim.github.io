@@ -109,7 +109,7 @@ function setValue() {
     // document.getElementById('result').innerHTML = 'Transaction id: ' + r + '<span id="pending" style="color:red;">(Pending)</span>';
     // txid = r;
   // });
-digimonStorage.get.call(value, function(err, res){
+digimonStorage.get.call(newValue, function(err, res){
    	if (!err){
    	var result = res.s;
     console.log(res.s);
