@@ -81,7 +81,7 @@ body{background-color:#000000;}
 <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
 <!-- script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script -->
 <script>
-var contractAddress = '0x30d44554d7abd17e22fde607c74842044bc2ad6b';
+var contractAddress = '0xba72182072d42a64256f9269459f881952339c40';
 var digimonContract;
 var digimonStorage;
 window.addEventListener('load', function() {
@@ -98,7 +98,8 @@ window.addEventListener('load', function() {
   startApp();
 });
 function startApp() {
-  digimonContract = web3.eth.contract([{"constant":false,"inputs":[{"name":"in_name","type":"string"}],"name":"login","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[{"name":"in_name","type":"string"}],"name":"get","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"say","type":"string"}],"name":"saying","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]);
+	digimonContract = web3.eth.contract([{"constant":false,"inputs":[{"name":"in_name","type":"string"}],"name":"login","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[{"name":"in_name","type":"string"}],"name":"get","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"say","type":"string"}],"name":"saying","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"in_name","type":"string"},{"indexed":false,"name":"flag","type":"uint8"}],"name":"GetEvent","type":"event"}]);
+
 
   digimonStorage = digimonContract.at(contractAddress);
 }
@@ -108,10 +109,11 @@ function setValue() {
     // document.getElementById('result').innerHTML = 'Transaction id: ' + r + '<span id="pending" style="color:red;">(Pending)</span>';
     // txid = r;
   // });
-  alert(newValue);
 
-  var result = digimonStorage.get.call(newValue, function(err, res){ console.log(res); });
-  alert(reslut);
+  var result = digimonStorage.get.call(newValue, function(err, res){
+   	if (!err)
+    alert(console.log(res.s));
+}); 
 	// digimonStorage.login(
 
  //           newValue,
