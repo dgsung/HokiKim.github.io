@@ -1,26 +1,117 @@
-<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.2.3/milligram.min.css">
-  <title>Simple Storage Dapp 예제 </title>
-  <style>
-  body {margin-left: 100px;}
-  .title {font-size: 250%;}
-  .copyright {margin-top: 100px;}
-  </style>
+<style type="text/css">
+body{background-color:#000000;}
+@font-face {
+    font-family: ArcaMajora3-Bold;
+    src: url("ArcaMajora3-Bold.otf") format("opentype");
+    src: url("Digivolve.otf") format("opentype");
+}
+@font-face {
+    font-family: Digivolve;
+    src: url("Digivolve.otf") format("opentype");
+}
+.layer{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  background:url('Digivice_tri_2.png') no-repeat right center;
+  width: 640;
+  height: 640;
+}
+.layer .t1 {
+	position:absolute;
+	top:42%;
+	left:50%;
+	transform:translate(-50%, -50%);
+	background-color:transparent;
+	width : 180;
+	height : 50;
+	font-size : 13pt;
+	color: #ffffff;
+	font-family: 'Digivolve';
+	border-right:0px; border-top:0px; border-left:0px; border-bottom:0px;
+	text-align: center;
+}
+.layer .h1 {
+	position:absolute;
+	top:48%;
+	left:50%;
+	transform:translate(-50%, -50%);
+	background-color:transparent;
+	width : 150;
+	height : 50;
+	font-size : 20pt;
+	color: #ffffff;
+	font-family: 'Digivolve';
+	/*border-right:0px; border-top:0px; border-left:0px; border-bottom:1px solid #FFFFFF;*/
+	text-align: center;
+}
+.layer .b1 {
+	position:absolute;
+	top:57%;
+	left:50%;
+	transform:translate(-50%, -50%);
+	background-color:transparent;
+	width : 100;
+	height : 50;
+	font-size : 13pt;
+	color: #ffffff;
+	font-family: 'Digivolve';
+	border-right:0px; border-top:0px; border-left:0px; border-bottom:0px;/
+	text-align: center;
+}
+</style>
 </head>
 <body>
-<h1 class="title">나도 dApp 개발해보자 by Atomrigs</h1>
-
-<img src='https://lh6.googleusercontent.com/DfTNPvzvhmiUiPyOrp97urRHO_si-SG4pvHS237-0bmsr30SufNSNxfPnVQVEO18C3SpcXwpfAg7aEk2irya7LJvScakc2AGWDgYk9siiVbatS-auMGZHAWCoSVn1SvZCioEHtVx'>
-
-<h5>강의에 사용된 샘플 dApp</h5>
-<ul>
-  <li><a href='https://HokiKim.github.io/simplestorage.html'>simple storage</a></li>
-</ul>
-
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<p>
+		<br>
+		<div class="layer">
+			<!-- <img src="Digivice_tri_2.png" width = "640", height="640", style = "margin-left: auto; margin-right: auto; display: block;"/> -->
+			<textarea class="t1"> your name? </textarea>
+			<input class="h1" type="text" name="text" maxlength="7">
+			<button class="b1" id="button1" type="text" name="text" onclick="setValue()" style="cursor:pointer">Log-in</button>
+			<script type="text/javascript" src="index.js"></script>
+		</div>
+	</p>
 </body>
 <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+<!-- script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script -->
+<script>
+var contractAddress = '0x5b63bfcceee8bd6e83d0c4ae8ce7555b9450a759';
+var abi = web3.eth.contract([{"constant":false,"inputs":[{"name":"in_name","type":"string"}],"name":"login","outputs":[{"name":"","type":"uint256"}],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"say","type":"string"}],"name":"saying","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]);
+var digimonContract;
+var digimonStorage;
+window.addEventListener('load', function() {
+  // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+  if (typeof web3 !== 'undefined') {
+    // Use Mist/MetaMask's provider
+    window.web3 = new Web3(web3.currentProvider);
+  } else {
+    console.log('No web3? You should consider trying MetaMask!')
+    // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+    window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+  }
+  // Now you can start your app & access web3 freely:
+  startApp();
+});
+function startApp() {
+  digimonContract = web3.eth.contract(abi);
+  digimonStorage = digimonContract.at(contractAddress);
+  document.getElementById('contractAddr').innerHTML = getLink(contractAddress);
+  web3.eth.getAccounts(function(e,r){
+    document.getElementById('accountAddr').innerHTML = getLink(r[0]);
+  });
+}
+function setValue() {
+  var newValue = document.getElementById('h1').value;
+  var txid
+  digimonStorage.login(newValue, function(e,r){
+    // document.getElementById('result').innerHTML = 'Transaction id: ' + r + '<span id="pending" style="color:red;">(Pending)</span>';
+    // txid = r;
+  });
+}
+</script>
 </html>
