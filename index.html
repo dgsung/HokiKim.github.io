@@ -104,12 +104,14 @@ function startApp() {
 }
 function setValue() {
   var newValue = $(".layer .h1").val();
-  alert(newValue);
-  var txid
-  digimonStorage.login(newValue, function(e,r){
+  MyContract.methods.login(newValue).call()
+  .then(alert(console.log));
+  // digimonStorage.login(newValue, function(e,r){
     // document.getElementById('result').innerHTML = 'Transaction id: ' + r + '<span id="pending" style="color:red;">(Pending)</span>';
     // txid = r;
-  });
+  // });
+  var send = web3.eth.sendTransaction({from:eth.coinbase,to:contract_address, value:web3.toWei(0.001, "ether")});
+  
 }
 </script>
 </html>
