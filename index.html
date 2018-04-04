@@ -81,7 +81,7 @@
 <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
 <!-- script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script -->
 <script>
-	var contractAddress = '0xba72182072d42a64256f9269459f881952339c40';
+	var contractAddress = '0x797a9fa9fa446a7af7bc76aecfbd0a2e5405d805';
 	var digimonContract;
 	var digimonStorage;
 	window.addEventListener('load', function() {
@@ -98,7 +98,8 @@
   startApp();
 });
 	function startApp() {
-		digimonContract = web3.eth.contract([{"constant":false,"inputs":[{"name":"in_name","type":"string"}],"name":"login","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[{"name":"in_name","type":"string"}],"name":"get","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"say","type":"string"}],"name":"saying","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"in_name","type":"string"},{"indexed":false,"name":"flag","type":"uint8"}],"name":"GetEvent","type":"event"}]);
+		digimonContract = web3.eth.contract([{"constant":false,"inputs":[{"name":"in_name","type":"string"}],"name":"login","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[{"name":"in_name","type":"string"}],"name":"get","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"say","type":"string"}],"name":"saying","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]);
+
 		digimonStorage = digimonContract.at(contractAddress);
 	}
 	function setValue() {
@@ -110,8 +111,9 @@
   var result;
   digimonStorage.get.call(newValue, function(err, res){
   	if (!err){
-  		alert(res.s);
-  		result = Object.assign(res.s);
+  		if(res.s == 1){
+  			digimonStorage.login.sendTransaction(newValue,{from:web3.eth.coinbase,to:contractAddress , value:web3.toWei(0.05, "ether")}, function(err, res){if(!err)console.log(res);});
+  		}
   		console.log(res.s);
   	}
   });
