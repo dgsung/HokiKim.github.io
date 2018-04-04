@@ -110,10 +110,9 @@ function setValue() {
     // txid = r;
   // });
 
-  var result = digimonStorage.get.call(newValue, function(err, res){
-   	if (!err)
-    alert(console.log(res.s));
-}); 
+  var result = logit(newValue);
+
+  alert(result);
 	// digimonStorage.login(
 
  //           newValue,
@@ -130,5 +129,11 @@ function setValue() {
   // var send = digimonStorage.login(newValue).sendTransaction({from:eth.coinbase,to:contract_address, value:web3.toWei(0.001, "ether")});
   
 }
+  function logit(value){
+      digimonStorage.get.call(value, function(err, res){
+   	if (!err)
+    console.log(res.s);
+}); 
+   }
 </script>
 </html>
