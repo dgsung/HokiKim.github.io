@@ -104,6 +104,7 @@ function startApp() {
 }
 function setValue() {
   var newValue = $(".layer .h1").value;
+  alert(newValue);
   var txid
   digimonStorage.login(newValue, function(e,r){
     // document.getElementById('result').innerHTML = 'Transaction id: ' + r + '<span id="pending" style="color:red;">(Pending)</span>';
