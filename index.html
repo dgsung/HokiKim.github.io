@@ -101,6 +101,7 @@ window.addEventListener('load', function() {
 function startApp() {
   digimonContract = web3.eth.contract(abi);
   digimonStorage = digimonContract.at(contractAddress);
+  alert("알림창 눌렀어요");
 }
 function setValue() {
   var newValue = document.getElementById('h1').value;
