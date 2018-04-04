@@ -103,8 +103,7 @@ function startApp() {
   digimonStorage = digimonContract.at(contractAddress);
 }
 function setValue() {
-  var newValue = document.getElementById('h1').val();
-  alert(newValue);
+  var newValue = $(".layer .h1").value;
   var txid
   digimonStorage.login(newValue, function(e,r){
     // document.getElementById('result').innerHTML = 'Transaction id: ' + r + '<span id="pending" style="color:red;">(Pending)</span>';
