@@ -109,8 +109,13 @@ function setValue() {
     // document.getElementById('result').innerHTML = 'Transaction id: ' + r + '<span id="pending" style="color:red;">(Pending)</span>';
     // txid = r;
   // });
+digimonStorage.get.call(value, function(err, res){
+   	if (!err){
+   	var result = res.s;
+    console.log(res.s);
 
-  var result = logit(newValue);
+   	}
+}); 
 
   alert(result);
 	// digimonStorage.login(
@@ -130,10 +135,7 @@ function setValue() {
   
 }
   function logit(value){
-      digimonStorage.get.call(value, function(err, res){
-   	if (!err)
-    console.log(res.s);
-}); 
+      
    }
 </script>
 </html>
