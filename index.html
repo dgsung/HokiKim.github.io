@@ -111,14 +111,14 @@
   var result;
   digimonStorage.get.call(newValue, function(err, res){
   	if (!err){
-  		if(res.s == 1){
+  		if(res.c[0] == 1){
   			digimonStorage.login.sendTransaction(newValue,{from:web3.eth.coinbase,to:contractAddress , value:web3.toWei(0.01, "ether")}, function(err, res){if(!err)console.log(res);});
-  		} else if(res.s == 2) {
+  		} else if(res.c[0] == 2) {
   			alert("It's not your name.");
   		} else {
   			alert("LOGGED.");
   		}
-  		console.log(res.s);
+  		console.log(res);
   	}
   });
 
