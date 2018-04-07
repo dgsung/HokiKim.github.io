@@ -1,130 +1,650 @@
-<html>
+<!-- Add your content of head and header -->
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<style type="text/css">
-	body{background-color:#000000;}
-	@font-face {
-		font-family: ArcaMajora3-Bold;
-		src: url("ArcaMajora3-Bold.otf") format("opentype");
-		src: url("Digivolve.otf") format("opentype");
-	}
-	@font-face {
-		font-family: Digivolve;
-		src: url("Digivolve.otf") format("opentype");
-	}
-	.layer{
-		position:absolute;
-		top:50%;
-		left:50%;
-		transform:translate(-50%, -50%);
-		background:url('Digivice_tri_2.png') no-repeat right center;
-		width: 640;
-		height: 640;
-	}
-	.layer .t1 {
-		position:absolute;
-		top:42%;
-		left:50%;
-		transform:translate(-50%, -50%);
-		background-color:transparent;
-		width : 180;
-		height : 50;
-		font-size : 13pt;
-		color: #ffffff;
-		font-family: 'Digivolve';
-		border-right:0px; border-top:0px; border-left:0px; border-bottom:0px;
-		text-align: center;
-	}
-	.layer .h1 {
-		position:absolute;
-		top:48%;
-		left:50%;
-		transform:translate(-50%, -50%);
-		background-color:transparent;
-		width : 150;
-		height : 50;
-		font-size : 20pt;
-		color: #ffffff;
-		font-family: 'Digivolve';
-		/*border-right:0px; border-top:0px; border-left:0px; border-bottom:1px solid #FFFFFF;*/
-		text-align: center;
-	}
-	.layer .b1 {
-		position:absolute;
-		top:57%;
-		left:50%;
-		transform:translate(-50%, -50%);
-		background-color:transparent;
-		width : 100;
-		height : 50;
-		font-size : 13pt;
-		color: #ffffff;
-		font-family: 'Digivolve';
-		border-right:0px; border-top:0px; border-left:0px; border-bottom:0px;/
-		text-align: center;
-	}
+  <meta charset="UTF-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width,initial-scale=1" name="viewport">
+  <meta content="description" name="description">
+  <meta name="google" content="notranslate" />
+  <meta content="Mashup templates have been developped by Orson.io team" name="author">
+
+  <!-- Disable tap highlight on IE -->
+  <meta name="msapplication-tap-highlight" content="no">
+  
+  <link href="./assets/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="./assets/favicon.ico" rel="icon">
+
+  <title>ICO Prediction Market</title>  
+
+<link href="./main.97292821.css" rel="stylesheet"></head>
+<style type="text/css">
+.form-style-6{
+    font: 95% Arial, Helvetica, sans-serif;
+    max-width: 400px;
+    margin: 10px auto;
+    padding: 16px;
+    background: #F7F7F7;
+}
+.form-style-6 h1{
+    background: #43D1AF;
+    padding: 20px 0;
+    font-size: 140%;
+    font-weight: 300;
+    text-align: center;
+    color: #fff;
+    margin: -16px -16px 16px -16px;
+}
+.form-style-6 input[type="text"],
+.form-style-6 input[type="date"],
+.form-style-6 input[type="datetime"],
+.form-style-6 input[type="email"],
+.form-style-6 input[type="number"],
+.form-style-6 input[type="search"],
+.form-style-6 input[type="time"],
+.form-style-6 input[type="url"],
+.form-style-6 textarea,
+.form-style-6 select 
+{
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 100%;
+    background: #fff;
+    margin-bottom: 4%;
+    border: 1px solid #ccc;
+    padding: 3%;
+    color: #555;
+    font: 95% Arial, Helvetica, sans-serif;
+}
+.form-style-6 input[type="text"]:focus,
+.form-style-6 input[type="date"]:focus,
+.form-style-6 input[type="datetime"]:focus,
+.form-style-6 input[type="email"]:focus,
+.form-style-6 input[type="number"]:focus,
+.form-style-6 input[type="search"]:focus,
+.form-style-6 input[type="time"]:focus,
+.form-style-6 input[type="url"]:focus,
+.form-style-6 textarea:focus,
+.form-style-6 select:focus
+{
+    box-shadow: 0 0 5px #43D1AF;
+    padding: 3%;
+    border: 1px solid #43D1AF;
+}
+
+.form-style-6 input[type="submit"],
+.form-style-6 input[type="button"]{
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 100%;
+    padding: 3%;
+    background: #43D1AF;
+    border-bottom: 2px solid #30C29E;
+    border-top-style: none;
+    border-right-style: none;
+    border-left-style: none;    
+    color: #fff;
+}
+.form-style-6 input[type="submit"]:hover,
+.form-style-6 input[type="button"]:hover{
+    background: #2EBC99;
+}
+.can-toggle {
+  position: relative;
+}
+.can-toggle *, .can-toggle *:before, .can-toggle *:after {
+  -moz-box-sizing: border-box;
+       box-sizing: border-box;
+}
+.can-toggle input[type="checkbox"] {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.can-toggle input[type="checkbox"][disabled] ~ label {
+  pointer-events: none;
+}
+.can-toggle input[type="checkbox"][disabled] ~ label .can-toggle__switch {
+  opacity: 0.4;
+}
+.can-toggle input[type="checkbox"]:checked ~ label .can-toggle__switch:before {
+  content: attr(data-unchecked);
+  left: 0;
+}
+.can-toggle input[type="checkbox"]:checked ~ label .can-toggle__switch:after {
+  content: attr(data-checked);
+}
+.can-toggle label {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  position: relative;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.can-toggle label .can-toggle__label-text {
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding-left: 32px;
+}
+.can-toggle label .can-toggle__switch {
+  position: relative;
+}
+.can-toggle label .can-toggle__switch:before {
+  content: attr(data-checked);
+  position: absolute;
+  top: 0;
+  text-transform: uppercase;
+  text-align: center;
+}
+.can-toggle label .can-toggle__switch:after {
+  content: attr(data-unchecked);
+  position: absolute;
+  z-index: 5;
+  text-transform: uppercase;
+  text-align: center;
+  background: white;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+.can-toggle input[type="checkbox"][disabled] ~ label {
+  color: rgba(119, 119, 119, 0.5);
+}
+.can-toggle input[type="checkbox"]:focus ~ label .can-toggle__switch, .can-toggle input[type="checkbox"]:hover ~ label .can-toggle__switch {
+  background-color: #777;
+}
+.can-toggle input[type="checkbox"]:focus ~ label .can-toggle__switch:after, .can-toggle input[type="checkbox"]:hover ~ label .can-toggle__switch:after {
+  color: #5e5e5e;
+}
+.can-toggle input[type="checkbox"]:hover ~ label {
+  color: #6a6a6a;
+}
+.can-toggle input[type="checkbox"]:checked ~ label:hover {
+  color: #55bc49;
+}
+.can-toggle input[type="checkbox"]:checked ~ label .can-toggle__switch {
+  background-color: #70c767;
+}
+.can-toggle input[type="checkbox"]:checked ~ label .can-toggle__switch:after {
+  color: #4fb743;
+}
+.can-toggle input[type="checkbox"]:checked:focus ~ label .can-toggle__switch, .can-toggle input[type="checkbox"]:checked:hover ~ label .can-toggle__switch {
+  background-color: #5fc054;
+}
+.can-toggle input[type="checkbox"]:checked:focus ~ label .can-toggle__switch:after, .can-toggle input[type="checkbox"]:checked:hover ~ label .can-toggle__switch:after {
+  color: #47a43d;
+}
+.can-toggle label .can-toggle__label-text {
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+.can-toggle label .can-toggle__switch {
+  -webkit-transition: background-color 0.3s cubic-bezier(0, 1, 0.5, 1);
+          transition: background-color 0.3s cubic-bezier(0, 1, 0.5, 1);
+  background: #848484;
+}
+.can-toggle label .can-toggle__switch:before {
+  color: rgba(255, 255, 255, 0.5);
+}
+.can-toggle label .can-toggle__switch:after {
+  -webkit-transition: -webkit-transform 0.3s cubic-bezier(0, 1, 0.5, 1);
+  transition: transform 0.3s cubic-bezier(0, 1, 0.5, 1);
+  color: #777;
+}
+.can-toggle input[type="checkbox"]:focus ~ label .can-toggle__switch:after, .can-toggle input[type="checkbox"]:hover ~ label .can-toggle__switch:after {
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
+}
+.can-toggle input[type="checkbox"]:checked ~ label .can-toggle__switch:after {
+  -webkit-transform: translate3d(65px, 0, 0);
+          transform: translate3d(65px, 0, 0);
+}
+.can-toggle input[type="checkbox"]:checked:focus ~ label .can-toggle__switch:after, .can-toggle input[type="checkbox"]:checked:hover ~ label .can-toggle__switch:after {
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
+}
+.can-toggle label {
+  font-size: 14px;
+}
+.can-toggle label .can-toggle__switch {
+  height: 36px;
+  -webkit-flex: 0 0 134px;
+      -ms-flex: 0 0 134px;
+          flex: 0 0 134px;
+  border-radius: 4px;
+}
+.can-toggle label .can-toggle__switch:before {
+  left: 67px;
+  font-size: 12px;
+  line-height: 36px;
+  width: 67px;
+  padding: 0 12px;
+}
+.can-toggle label .can-toggle__switch:after {
+  top: 2px;
+  left: 2px;
+  border-radius: 2px;
+  width: 65px;
+  line-height: 32px;
+  font-size: 12px;
+}
+.can-toggle label .can-toggle__switch:hover:after {
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
+}
+.can-toggle.demo-rebrand-1 input[type="checkbox"][disabled] ~ label {
+  color: rgba(181, 62, 116, 0.5);
+}
+.can-toggle.demo-rebrand-1 input[type="checkbox"]:focus ~ label .can-toggle__switch, .can-toggle.demo-rebrand-1 input[type="checkbox"]:hover ~ label .can-toggle__switch {
+  background-color: #b53e74;
+}
+.can-toggle.demo-rebrand-1 input[type="checkbox"]:focus ~ label .can-toggle__switch:after, .can-toggle.demo-rebrand-1 input[type="checkbox"]:hover ~ label .can-toggle__switch:after {
+  color: #8f315c;
+}
+.can-toggle.demo-rebrand-1 input[type="checkbox"]:hover ~ label {
+  color: #a23768;
+}
+.can-toggle.demo-rebrand-1 input[type="checkbox"]:checked ~ label:hover {
+  color: #39916a;
+}
+.can-toggle.demo-rebrand-1 input[type="checkbox"]:checked ~ label .can-toggle__switch {
+  background-color: #44ae7f;
+}
+.can-toggle.demo-rebrand-1 input[type="checkbox"]:checked ~ label .can-toggle__switch:after {
+  color: #368a65;
+}
+.can-toggle.demo-rebrand-1 input[type="checkbox"]:checked:focus ~ label .can-toggle__switch, .can-toggle.demo-rebrand-1 input[type="checkbox"]:checked:hover ~ label .can-toggle__switch {
+  background-color: #3d9c72;
+}
+.can-toggle.demo-rebrand-1 input[type="checkbox"]:checked:focus ~ label .can-toggle__switch:after, .can-toggle.demo-rebrand-1 input[type="checkbox"]:checked:hover ~ label .can-toggle__switch:after {
+  color: #2f7757;
+}
+.can-toggle.demo-rebrand-1 label .can-toggle__label-text {
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+.can-toggle.demo-rebrand-1 label .can-toggle__switch {
+  -webkit-transition: background-color 0.3s ease-in-out;
+          transition: background-color 0.3s ease-in-out;
+  background: #c14b81;
+}
+.can-toggle.demo-rebrand-1 label .can-toggle__switch:before {
+  color: rgba(255, 255, 255, 0.6);
+}
+.can-toggle.demo-rebrand-1 label .can-toggle__switch:after {
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  color: #b53e74;
+}
 </style>
-</head>
 <body>
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<p>
-		<br>
-		<div class="layer">
-			<!-- <img src="Digivice_tri_2.png" width = "640", height="640", style = "margin-left: auto; margin-right: auto; display: block;"/> -->
-			<span class="t1"> your name? </span>
-			<input class="h1" type="text" name="text" maxlength="7">
-			<button class="b1" id="button1" type="text" name="text" onclick="setValue()" style="cursor:pointer">Log-in</button>
-			<script type="text/javascript" src="index.js"></script>
-		</div>
-	</p>
-</body>
+
+ <!-- Add your content of header -->
+<header>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+
+      <div class="navbar-collapse">
+        <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="./index.html#contact-section-container" title="" class="anchor-link">Contact Us</a></li>
+            <li>
+                <p>
+                    <a href="./components.html" class="btn btn-default navbar-btn" >Components</a>
+                </p>
+            </li>
+
+
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+
+<!-- Add your site or app content here -->
+<div class="background-image-container white-text-container" style="background-image: url('./assets/images/img-05.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>The ICO</h1>
+                <p class="">THE BEST WAY FOR PREDICT ICO</p>
+                <a href="#contact-section-container" class="btn btn-primary btn-lg anchor-link" title="">Get in touch</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-12 section-container-spacer">
+                <h2 class="text-center">How to use?</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <div class="fa-container">
+                    <i class="fa fa-comment-o fa-3x" aria-hidden="true"></i>
+                </div>
+                <h3 class="text-center">1. Make your own MetaMask</h3>
+                <p>With using chrome, go https://metamask.io/. And install the MetaMask, make your account for prediction.</p>
+            </div>
+
+            <div class="col-xs-12 col-md-4">
+                <div class="fa-container">
+                    <i class="fa fa-heart-o fa-3x" aria-hidden="true"></i>
+                </div>
+                <h3 class="text-center">2. Charge your token</h3>
+                <p>Get our token with BTC/ETH. For using our website, you have to charge your token. Buy BTC/ETH and send to our contract account. Then you can get your token.</p>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="fa-container">
+                    <i class="fa fa-bell-o fa-3x" aria-hidden="true"></i>
+                </div>
+                <h3 class="text-center">3. Investing in ICO predictions</h3>
+                <p> Among over 100 ICO predictions, you can choose and invest! If you predict the agenda right, You can get our token more than you invest.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-container section-half-background-image-container">
+    <div class="image-column" style="background-image: url('./assets/images/img-01.jpg')"></div>
+    <div class="container">
+        <div class="row">
+            <div class="section-label reveal">
+                <p>PREDICTION</p>
+            </div>
+            <div class="col-md-6 col-md-offset-6 text-column">
+                <h2>What is ICO?</h2>
+                <h3>Initial Coin Offering (ICO)</h3>
+                <p>An initial coin offering (ICO) is a controversial means of crowdfunding centered around cryptocurrency, which can be a source of capital for startup companies. In an ICO, a quantity of the crowdfunded cryptocurrency is sold to investors in the form of "tokens", in exchange for legal tender or other cryptocurrencies such as bitcoin or ethereum. These tokens supposedly become functional units of currency if or when the ICO's funding goal is met and the project launches.</p>
+                <p>ICOs provide a means by which startups avoid costs of regulatory compliance and intermediaries, such as venture capitalists, bank and stock exchanges, while increasing risk for investors. ICOs may fall outside existing regulations depending on the nature of the project, or are banned altogether in some jurisdictions, such as China and South Korea.</p>
+                <p>Our purpose is making it sure that gethering ICO information efficiently. With gathering ICO information, we can provide high quality investment data and motivate developers to announce what items people like.</p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="section-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-12 section-container-spacer">
+                <h2 class="text-center">Hot Predictions At Now</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <img src="./assets/images/img-02.jpg" alt="" class="img-responsive">
+                <h3 class="text-center">Kakao Talk</h3>
+                <p>Will Kakao Talk do ICO until this August?</p>
+                <div class="form-style-6">
+                <form>
+                <div class="can-toggle demo-rebrand-1" name="field1">
+                  <input id="d1" type="checkbox" onclick="toggle1();">
+                  <label for="d1">
+                    <div class="can-toggle__switch" data-checked="YES" data-unchecked="NO"></div>
+                  </label>
+                </div>
+                <input type="text" name="field3" placeholder="How much will you bet?" />
+                <input type="button" value="Send" id ="btn1" onclick="button1_click();"/>
+                </form>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <img src="./assets/images/img-03.jpg" alt="" class="img-responsive">
+                <h3 class="text-center">EOS</h3>
+                <p>After ICO closing, Will EOS jump over $10?</p>
+                <div class="form-style-6">
+                <form>
+                <div class="can-toggle demo-rebrand-1" name="field1">
+                  <input id="d2" type="checkbox" onclick="toggle2();">
+                  <label for="d2">
+                    <div class="can-toggle__switch" data-checked="YES" data-unchecked="NO"></div>
+                  </label>
+                </div>
+                <input type="text" name="field3" placeholder="How much will you bet?" />
+                <input type="button" value="Send" id ="btn2" onclick="button2_click();"/>
+                </form>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <img src="./assets/images/img-04.jpg" alt="" class="img-responsive">
+                <h3 class="text-center">TRON</h3>
+                <p>Tron's mainnet can be uploaded in May? </p>
+                <div class="form-style-6">
+                <form>
+                <div class="can-toggle demo-rebrand-1" name="field1">
+                  <input id="d3" type="checkbox" onclick="toggle3();">
+                  <label for="d3">
+                    <div class="can-toggle__switch" data-checked="YES" data-unchecked="NO"></div>
+                  </label>
+                </div>
+                <input type="text" name="field3" placeholder="How much will you bet?" />
+                <input type="button" value="Send"  id ="btn3" onclick="button3_click();"/>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="">
+    <div class='container-fluid'>
+        <div class="row map-container">
+            <div id="map"></div>
+            <div class="col-xs-10 col-md-4 contact-block-container reveal">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <h3>Phone</h3>
+                        <p>+ 8210 6866 6173</p>
+
+                        <h3>E-mail</h3>
+                        <p>ghrl9613@snu.ac.kr</p>
+
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6">
+                        <h3>Address</h3>
+                        <p>Seoul National University, Engineering Building, Seoul , Republic of Korea</p>
+
+                        <h3>Open hours</h3>
+                        <p>Mon - Fri : 9AM - 5PM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="section-container" id="contact-section-container">
+    <div class="container contact-form-container">
+        <div class="row">
+            <div class="col-xs-12 col-md-offset-2 col-md-8">
+                <div class="section-container-spacer">
+                    <h2 class="text-center">Get in touch</h2>
+                </div>
+                <form action="">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="name" class="form-control" placeholder="Name">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="email" name="email" class="form-control" placeholder="Email">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <textarea class="form-control" rows="3" placeholder="Enter your message"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="inlineCheckbox1" value="option1">Interesting in your company
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="inlineCheckbox2" value="option2">Error with using this site.
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Send message</button>
+                    <a href="" class="btn btn-default">Reset</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
 <!-- script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script -->
 <script>
-	var contractAddress = '0xb607645c4e7ec584f5ef474ba7d6a5f661f3c3ef';
-	var digimonContract;
-	var digimonStorage;
-	window.addEventListener('load', function() {
+    var contractAddress = '0x83f9dd9c0dd6aa823b622d8d01563e992e7da7f2';
+    var predictionmarketContract ;
+    var predictionmarketStorage;
+    window.addEventListener('load', function() {
   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
   if (typeof web3 !== 'undefined') {
     // Use Mist/MetaMask's provider
     window.web3 = new Web3(web3.currentProvider);
 } else {
-	console.log('No web3? You should consider trying MetaMask!')
+    console.log('No web3? You should consider trying MetaMask!')
     // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
     window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 }
   // Now you can start your app & access web3 freely:
   startApp();
 });
-	function startApp() {
-		digimonContract = web3.eth.contract([{"constant":false,"inputs":[{"name":"in_name","type":"string"}],"name":"login","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[{"name":"in_name","type":"string"}],"name":"get","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"say","type":"string"}],"name":"saying","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]);
+    function startApp() {
+        predictionmarketContract = web3.eth.contract([{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"predictions","outputs":[{"name":"question","type":"string"},{"name":"result","type":"bool"},{"name":"bettingStart","type":"uint32"},{"name":"bettingEnd","type":"uint32"},{"name":"resultAnnounced","type":"uint32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"predictionIndex","type":"uint256"}],"name":"betInfo","outputs":[{"name":"","type":"uint32"},{"name":"","type":"uint32"},{"name":"","type":"uint32"},{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"predictionIndex","type":"uint256"}],"name":"totalBets","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"withdraw","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"kill","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"predictionIndex","type":"uint256"},{"name":"response","type":"bool"}],"name":"bet","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"predictionIndex","type":"uint256"},{"name":"_result","type":"bool"}],"name":"announceResult","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"feePercentage","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"predictionsCount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_question","type":"string"},{"name":"_bettingStart","type":"uint32"},{"name":"_bettingEnd","type":"uint32"}],"name":"makePrediction","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"livePredictionsCount","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"minimumBet","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"predictionIndex","type":"uint256"}],"name":"getMyBetAmount","outputs":[{"name":"","type":"uint256"},{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"withdrawFee","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"predictionIndex","type":"uint256"}],"name":"getPrediction","outputs":[{"name":"","type":"string"},{"name":"","type":"uint256"},{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"_feePercentage","type":"uint8"},{"name":"_minimumBet","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"predictionIndex","type":"uint256"},{"indexed":false,"name":"bettingStartTime","type":"uint256"}],"name":"NewPrediction","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"predictionIndex","type":"uint256"},{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"response","type":"bool"},{"indexed":false,"name":"value","type":"uint256"}],"name":"BetPlaced","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"predictionIndex","type":"uint256"},{"indexed":false,"name":"result","type":"bool"}],"name":"ResultAnnounced","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Withdraw","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"}]);
 
-		digimonStorage = digimonContract.at(contractAddress);
-	}
-	function setValue() {
-		var newValue = $(".layer .h1").val();
-  // digimonStorage.get(newValue, function(e,r){
-    // document.getElementById('result').innerHTML = 'Transaction id: ' + r + '<span id="pending" style="color:red;">(Pending)</span>';
-    // txid = r;
-  // });
-  var result;
-  digimonStorage.get.call(newValue, function(err, res){
-  	if (!err){
-  		if(res.c[0] == 1){
-  			digimonStorage.login.sendTransaction(newValue,{from:web3.eth.coinbase,to:contractAddress , value:web3.toWei(0.01, "ether")}, function(err, res){if(!err)console.log(res);});
-  		} else if(res.c[0] == 2) {
-  			alert("It's not your name.");
-  		} else {
-  			alert("LOGGED.");
-  		}
-  		console.log(res);
-  	}
-  });
+        predictionmarketStorage = predictionmarketContract.at(contractAddress);
+    }
 
+var ts1=false;
+var ts2=false;
+var ts3=false;
+
+function button1_click() {
+        var newValue = document.getElementById('btn1').value;
+        console.log(newValue);
+        predictionmarketStorage.bet.sendTransaction(0,true,{from:web3.eth.coinbase,to:contractAddress , value:web3.toWei(0.01, "ether")}, function(err, res){if(!err)console.log(res);});
 }
-function logit(value){
+function button2_click() {
+        var newValue = document.getElementById('btn2').value;
+        predictionmarketStorage.bet.sendTransaction(1,true,{from:web3.eth.coinbase,to:contractAddress , value:web3.toWei(+newValue, "ether")}, function(err, res){if(!err)console.log(res);});
+}
+function button3_click() {
+        var newValue = document.getElementById('btn3').value;
+        predictionmarketStorage.bet.sendTransaction(2,true,{from:web3.eth.coinbase,to:contractAddress , value:web3.toWei(+newValue, "ether")}, function(err, res){if(!err)console.log(res);});
+}
 
+function toggle1() {
+       ts1=!ts1
+}
+function toggle2() {
+       ts2=!ts2
+   }
+function toggle3() {
+       ts3=!ts3
 }
 </script>
-</html>
+
+<script>
+document.addEventListener("DOMContentLoaded", function (event) {
+    
+  googleMapInit(); 
+  scrollToAnchor();
+  scrollRevelation('reveal');
+});
+</script>
+
+<footer class="footer-container white-text-container">
+    <div class="container">
+        <div class="row">
+                <div class="col-md-4">
+                    <h4>About us</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet consectetur dolor</p>
+                </div>
+
+                <div class="col-md-4">
+                    <h4>Do you like ? Share this !</h4>
+                    <div>
+                        <p>
+                            <a href="https://www.twitter.com" class="fa-icon" title="">
+                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                        </a>
+                            <a href="https://www.facebook.com" class="fa-icon" title="">
+                                <i class="fa fa-facebook" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://www.linkedin.com" class="fa-icon" title="">
+                                <i class="fa fa-linkedin" aria-hidden="true"></i>
+                            </a>
+                        </p>
+                    </div>
+                    <div>
+                        <p><small>© Untitled | Website created with <a href="http://www.mashup-template.com/" title="Create website with free html template">Mashup Template</a>/<a href="https://www.unsplash.com/" title="Beautiful Free Images">Unsplash</a></small></p>
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+                        
+                    <h4>Subscribe to newsletter</h4>
+                    
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control footer-input-text">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default btn-newsletter ">OK</button>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function (event) {
+  navbarToggleSidebar();
+});
+</script>
+
+
+<script type="text/javascript" src="./main.faaf51f9.js"></script>
