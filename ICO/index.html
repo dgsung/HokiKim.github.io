@@ -560,6 +560,7 @@ var ts3=false;
 
 function button1_click() {
         var newValue = document.getElementById('btn1').value;
+        console.log(newValue)
         predictionmarketStorage.bet.sendTransaction(0,true,{from:web3.eth.coinbase,to:contractAddress , value:web3.toWei(0.01, "ether")}, function(err, res){if(!err)console.log(res);});
 }
 function button2_click() {
