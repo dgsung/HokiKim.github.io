@@ -559,15 +559,15 @@ var ts2=false;
 var ts3=false;
 
 function button1_click() {
-        var newValue = $("#btn1").val();
+        var newValue = document.getElementById('btn1').value;
         predictionmarketStorage.bet.sendTransaction(0,true,{from:web3.eth.coinbase,to:contractAddress , value:web3.toWei(newValue, "ether")}, function(err, res){if(!err)console.log(res);});
 }
 function button2_click() {
-        var newValue = $("#btn2").val();
+        var newValue = document.getElementById('btn2').value;
         predictionmarketStorage.bet.sendTransaction(1,true,{from:web3.eth.coinbase,to:contractAddress , value:web3.toWei(newValue, "ether")}, function(err, res){if(!err)console.log(res);});
 }
 function button3_click() {
-        var newValue = $("#btn3").val();
+        var newValue = document.getElementById('btn3').value;
         predictionmarketStorage.bet.sendTransaction(2,true,{from:web3.eth.coinbase,to:contractAddress , value:web3.toWei(newValue, "ether")}, function(err, res){if(!err)console.log(res);});
 }
 
