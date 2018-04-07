@@ -415,8 +415,8 @@
                     <div class="can-toggle__switch" data-checked="YES" data-unchecked="NO"></div>
                   </label>
                 </div>
-                <input type="text" name="field3" placeholder="How much will you bet?" />
-                <input type="button" value="Send" id ="btn1" onclick="button1_click();"/>
+                <input type="text" name="field3" placeholder="How much will you bet?" id ="btn1" onclick="button1_click();" />
+                <input type="button" value="Send"/>
                 </form>
                 </div>
             </div>
@@ -432,8 +432,8 @@
                     <div class="can-toggle__switch" data-checked="YES" data-unchecked="NO"></div>
                   </label>
                 </div>
-                <input type="text" name="field3" placeholder="How much will you bet?" />
-                <input type="button" value="Send" id ="btn2" onclick="button2_click();"/>
+                <input type="text" name="field3" placeholder="How much will you bet?" id ="btn2" onclick="button2_click();" />
+                <input type="button" value="Send" />
                 </form>
                 </div>
             </div>
@@ -449,8 +449,8 @@
                     <div class="can-toggle__switch" data-checked="YES" data-unchecked="NO"></div>
                   </label>
                 </div>
-                <input type="text" name="field3" placeholder="How much will you bet?" />
-                <input type="button" value="Send"  id ="btn3" onclick="button3_click();"/>
+                <input type="text" name="field3" placeholder="How much will you bet?"  id ="btn3" onclick="button3_click();/>
+                <input type="button" value="Send""/>
                 </form>
                 </div>
             </div>
@@ -560,8 +560,7 @@ var ts3=false;
 
 function button1_click() {
         var newValue = document.getElementById('btn1').value;
-        alert(newValue)
-        predictionmarketStorage.bet.sendTransaction(0,true,{from:web3.eth.coinbase,to:contractAddress , value:web3.toWei(0.01, "ether")}, function(err, res){if(!err)console.log(res);});
+        predictionmarketStorage.bet.sendTransaction(0,true,{from:web3.eth.coinbase,to:contractAddress , value:web3.toWei(+newValue, "ether")}, function(err, res){if(!err)console.log(res);});
 }
 function button2_click() {
         var newValue = document.getElementById('btn2').value;
