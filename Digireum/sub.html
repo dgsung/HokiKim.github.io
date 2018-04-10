@@ -1,0 +1,53 @@
+<html>
+<head>
+<style type="text/css">
+body{background-color:#000000;
+	/*background-image: url('matrix_2.gif');*/
+	background-size:30%;
+}
+
+@font-face {
+    font-family: ArcaMajora3-Bold;
+    src: url("font/ArcaMajora3-Bold.otf") format("opentype");
+}
+@font-face {
+    font-family: Digivolve;
+    src: url("font/Digivolve.otf") format("opentype");
+}
+.layer{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  width: 800;
+  height: 800;
+  background:url('egg/egg_black.gif') no-repeat right center;
+}
+.layer .h1 {
+		position:absolute;
+		top:98%;
+		left:53%;
+		transform:translate(-50%, -50%);
+		background-color:transparent;
+		width : 650;
+		height : 50;
+		font-size : 20pt;
+		color: #ffffff;
+		font-family: 'Digivolve';
+		/*border-right:0px; border-top:0px; border-left:0px; border-bottom:1px solid #FFFFFF;*/
+		text-align: center;
+}
+</style>
+</head>
+<body>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<p>
+		<br>
+		<div class="layer">
+			<form onsubmit="alert('이동'); return false;">
+				<input class="h1" type="text" placeholder ="Say anyting to your egg. And Enter." onkeydown="JavaScript:Enter_Check();">
+			</form>
+		</div>
+	</p>
+</body>
+</html>
