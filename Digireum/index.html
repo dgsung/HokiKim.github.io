@@ -103,27 +103,19 @@
 	}
 	function setValue() {
 		var newValue = $(".layer .h1").val();
-  // digimonStorage.get(newValue, function(e,r){
-    // document.getElementById('result').innerHTML = 'Transaction id: ' + r + '<span id="pending" style="color:red;">(Pending)</span>';
-    // txid = r;
-  // });
-  var result;
-  digimonStorage.get.call(newValue, function(err, res){
-  	if (!err){
-  		if(res.c[0] == 1){
-  			digimonStorage.login.sendTransaction(newValue,{from:web3.eth.coinbase,to:contractAddress , value:web3.toWei(0.01, "ether")}, function(err, res){if(!err)console.log(res);});
-  		} else if(res.c[0] == 2) {
-  			alert("IT'S NOT YOUR NAME.");
-  		} else {
-  			alert("LOGGED.");
-  		}
-  		console.log(res);
-  	}
-  });
+		digimonStorage.get.call(newValue, function(err, res){
+			if (!err){
+				if(res.c[0] == 1){
+					digimonStorage.login.sendTransaction(newValue,{from:web3.eth.coinbase,to:contractAddress , value:web3.toWei(0.01, "ether")}, function(err, res){if(!err)console.log(res);});
+				} else if(res.c[0] == 2) {
+					alert("IT'S NOT YOUR NAME.");
+				} else {
+					alert("LOGGED.");
+				}
+				console.log(res);
+			}
+		});
 
-}
-function logit(value){
-
-}
+	}
 </script>
 </html>

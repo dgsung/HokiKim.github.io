@@ -1,29 +1,29 @@
 <html>
 <head>
-<style type="text/css">
-body{background-color:#000000;
-	/*background-image: url('matrix_2.gif');*/
-	background-size:30%;
-}
+	<style type="text/css">
+	body{background-color:#000000;
+		/*background-image: url('matrix_2.gif');*/
+		background-size:30%;
+	}
 
-@font-face {
-    font-family: ArcaMajora3-Bold;
-    src: url("font/ArcaMajora3-Bold.otf") format("opentype");
-}
-@font-face {
-    font-family: Digivolve;
-    src: url("font/Digivolve.otf") format("opentype");
-}
-.layer{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%, -50%);
-  width: 800;
-  height: 800;
-  background:url('egg/egg_black.gif') no-repeat right center;
-}
-.layer .h1 {
+	@font-face {
+		font-family: ArcaMajora3-Bold;
+		src: url("font/ArcaMajora3-Bold.otf") format("opentype");
+	}
+	@font-face {
+		font-family: Digivolve;
+		src: url("font/Digivolve.otf") format("opentype");
+	}
+	.layer{
+		position:absolute;
+		top:50%;
+		left:50%;
+		transform:translate(-50%, -50%);
+		width: 800;
+		height: 800;
+		background:url('egg/egg_black.gif') no-repeat right center;
+	}
+	.layer .h1 {
 		position:absolute;
 		top:98%;
 		left:53%;
@@ -36,7 +36,7 @@ body{background-color:#000000;
 		font-family: 'Digivolve';
 		/*border-right:0px; border-top:0px; border-left:0px; border-bottom:1px solid #FFFFFF;*/
 		text-align: center;
-}
+	}
 </style>
 </head>
 <body>
@@ -44,10 +44,49 @@ body{background-color:#000000;
 	<p>
 		<br>
 		<div class="layer">
-			<form onsubmit="alert('이동'); return false;">
+			<form onsubmit="sendSay()">
 				<input class="h1" type="text" placeholder ="Say anyting to your egg. And Enter." onkeydown="JavaScript:Enter_Check();" onKeyUp="this.value=this.value.toUpperCase();">
 			</form>
 		</div>
 	</p>
 </body>
+
+<script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
+<!-- script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script -->
+<script>
+	var contractAddress = '0xb607645c4e7ec584f5ef474ba7d6a5f661f3c3ef';
+	var digimonContract;
+	var digimonStorage;
+	window.addEventListener('load', function() {
+  // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+  if (typeof web3 !== 'undefined') {
+    // Use Mist/MetaMask's provider
+    window.web3 = new Web3(web3.currentProvider);
+} else {
+	console.log('No web3? You should consider trying MetaMask!')
+    // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+    window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+}
+  // Now you can start your app & access web3 freely:
+  startApp();
+});
+	function startApp() {
+		digimonContract = web3.eth.contract([{"constant":false,"inputs":[{"name":"in_name","type":"string"}],"name":"login","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[{"name":"in_name","type":"string"}],"name":"get","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"say","type":"string"}],"name":"saying","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]);
+
+		digimonStorage = digimonContract.at(contractAddress);
+	}
+	function setValue() {
+		var newValue = $(".layer .h1").val();
+		digimonStorage.saying.call(newValue, function(err, res){
+			if (!err){
+				alert("SENDED.");
+			}
+			console.log(res);
+		}
+	});
+
+	}
+
+</script>
+
 </html>
