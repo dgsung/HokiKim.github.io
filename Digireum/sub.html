@@ -76,7 +76,7 @@
 
 		digimonStorage = digimonContract.at(contractAddress);
 	}
-	function setValue() {
+	function sendSay() {
 		var newValue = $(".layer .h1").val();
 		digimonStorage.saying(String(newValue), function(err, res){
 			if (!err){
