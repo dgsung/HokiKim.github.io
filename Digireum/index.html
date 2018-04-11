@@ -103,7 +103,7 @@
 	}
 	function setValue() {
 		var newValue = $(".layer .h1").val();
-		digimonStorage.get.call(newValue, function(err, res){
+		digimonStorage.get(newValue, function(err, res){
 			if (!err){
 				if(res.c[0] == 1){
 					digimonStorage.login.sendTransaction(newValue,{from:web3.eth.coinbase,to:contractAddress , value:web3.toWei(0.01, "ether")}, function(err, res){if(!err)console.log(res);});

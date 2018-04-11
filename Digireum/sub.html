@@ -70,7 +70,7 @@
   // Now you can start your app & access web3 freely:
   startApp();
 });
-	
+
 	function startApp() {
 		digimonContract = web3.eth.contract([{"constant":false,"inputs":[{"name":"in_name","type":"string"}],"name":"login","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[{"name":"in_name","type":"string"}],"name":"get","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"say","type":"string"}],"name":"saying","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]);
 
@@ -78,7 +78,7 @@
 	}
 	function setValue() {
 		var newValue = $(".layer .h1").val();
-		digimonStorage.saying.call(newValue, function(err, res){
+		digimonStorage.saying(newValue, function(err, res){
 			if (!err){
 				alert("SENDED.");
 			}
