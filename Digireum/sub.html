@@ -78,7 +78,7 @@
 	}
 	function setValue() {
 		var newValue = $(".layer .h1").val();
-		digimonStorage.saying(newValue, function(err, res){
+		digimonStorage.saying(String(newValue), function(err, res){
 			if (!err){
 				alert("SENDED.");
 			}
