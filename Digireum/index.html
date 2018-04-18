@@ -103,7 +103,7 @@
 	function setValue() {
 		var newValue = $(".layer .h1").val();
 		var txid;
-		digireum.get(newValue, function(err, res){
+		digireum.getTamerInfo(newValue, function(err, res){
 			if (!err){
 				if(res.c[0] == 1){
 					digireum.login.sendTransaction(newValue, function(err, res){
