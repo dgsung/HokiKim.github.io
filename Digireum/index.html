@@ -80,7 +80,7 @@
 <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
 <!-- script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script -->
 <script>
-	var contractAddress = '0x060daf8a2606e5e3ce17bce8487c98bd33870a26';
+	var contractAddress = '0x42ace1b0651eb0f2711bfcdd22480a6b674392b6';
 	var digireumContract
 	var digireum
 	window.addEventListener('load', function() {
@@ -102,10 +102,25 @@
 	}
 	function setValue() {
 		var newValue = $(".layer .h1").val();
+		var txid;
 		digireum.get(newValue, function(err, res){
 			if (!err){
 				if(res.c[0] == 1){
-					digireum.login.sendTransaction(newValue,{from:web3.eth.coinbase,to:contractAddress , value:web3.toWei(0.002, "ether")}, function(err, res){if(!err)console.log(res);});
+					digireum.login.sendTransaction(newValue, function(err, res){
+						if(!err)console.log(res);
+						txid = res;
+					});
+
+					var filter = web3.eth.filter('latest');
+					filter.watch(function(e, r){
+						web3.eth.getTransaction(txid, function(e, r){
+							if (r!=null && r.blockNumber > 0){
+								alert("NEW TAMER LOGGED.");
+								filter.stopWatching();
+							}
+						});
+					});
+
 				} else if(res.c[0] == 2) {
 					alert("IT'S NOT YOUR NAME.");
 				} else {
@@ -114,7 +129,6 @@
 				console.log(res);
 			}
 		});
-
 	}
 </script>
 </html>

@@ -1,11 +1,9 @@
 <html>
 <head>
 	<style type="text/css">
-	body{background-color:#000000;
-		/*background-image: url('matrix_2.gif');*/
-		background-size:30%;
+	body{
+		overflow:hidden
 	}
-
 	@font-face {
 		font-family: ArcaMajora3-Bold;
 		src: url("font/ArcaMajora3-Bold.otf") format("opentype");
@@ -14,28 +12,49 @@
 		font-family: Digivolve;
 		src: url("font/Digivolve.otf") format("opentype");
 	}
-	.layer{
+	.toplayer{
+		background:url('background/background.png') no-repeat;
+		background-size: contain;
 		position:absolute;
+		width:1280; 
+		height:721;
 		top:50%;
+		left:50%; 
+  		transform:translate(-50%, -50%);
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover; background-size: cover;
+	}
+	.layer{
+		width:200; 
+		height:200;		
+		/*border: 1px solid red;*/
+		position:absolute;
+		top:78%;
 		left:50%;
 		transform:translate(-50%, -50%);
-		width: 800;
-		height: 800;
-		background:url('egg/egg_black.gif') no-repeat right center;
 	}
-	.layer .h1 {
+	.layer .digi {
+		/*border: 1px solid red;*/
 		position:absolute;
-		top:98%;
-		left:53%;
-		transform:translate(-50%, -50%);
-		background-color:transparent;
-		width : 650;
-		height : 50;
-		font-size : 20pt;
-		color: #ffffff;
-		font-family: 'Digivolve';
-		/*border-right:0px; border-top:0px; border-left:0px; border-bottom:1px solid #FFFFFF;*/
-		text-align: center;
+		bottom:0;
+		transform: scale3d(-1.5, 1.5, 1.5);
+		stand .5s linear alternate infinite
+	}
+	@keyframes jump-left {
+	  0%   {transform: translate3d(0,0,0) scale3d(1.5,1.5,1.5);}
+	  40%  {transform: translate3d(0,-20%,0) scale3d(1.5,1.5,1.5);}
+	  100% {transform: translate3d(0,-40%,0) scale3d(1.5,1.5,1.5);}
+	}
+	@keyframes jump-right {
+	  0%   {transform: translate3d(0,0,0) scale3d(-1,5,1.5,1.5);}
+	  40%  {transform: translate3d(0,-20%,0) scale3d(-1.5,1.5,1.5);}
+	  100% {transform: translate3d(0,-40%,0) scale3d(-1.5,1.5,1.5);}
+	}
+	@keyframes stand {
+	  0%   {transform: translate3d(0,0,0) scale3d(-1,5,1.5,1.5);}
+	  40%  {transform: translate3d(0,0,0) scale3d(-1.5,1.5,1.5);}
+	  100% {transform: translate3d(0,0,0) scale3d(-1.5,1.5,1.5);}
 	}
 </style>
 </head>
@@ -43,18 +62,51 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<p>
 		<br>
-		<div class="layer">
-			<form onsubmit="sendSay()">
-				<input class="h1" type="text" placeholder ="Say anyting to your egg. And Enter." onkeydown="JavaScript:Enter_Check();" onKeyUp="this.value=this.value.toUpperCase();">
-			</form>
+		<div class="toplayer">
+			<div class="layer">
+				<img class="digi" id="digi" src="digimage/14.gif"/>
+			</div>
 		</div>
 	</p>
 </body>
 
 <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
 <!-- script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script -->
+
+<script type="text/javascript">
+var interval = 2000;
+var walk = 60;
+var el = document.getElementById("digi");
+var pos = 0;
+function moveAuto(){
+	var random = Math.random();
+	if(random < 0.35 &&  pos >= -300){
+		el.style.animation="jump-left .5s linear alternate infinite"
+		moveLeft(interval);
+		pos = pos - walk
+	} else if(random > 0.65 && pos <= 300) {
+		moveRight(interval);
+		el.style.animation="jump-right .5s linear alternate infinite"
+		pos = pos + walk
+	} else {
+		el.style.animation="stand .5s linear alternate infinite"
+	}
+}
+
+function moveRight(interval){
+	$(".layer").animate({left:"+=60"}, interval);
+}
+
+function moveLeft(interval){
+	$(".layer").animate({left:"-=60"}, interval);
+}
+
+st=setInterval("moveAuto()",interval);
+
+</script>
+
 <script>
-	var contractAddress = '0x42ace1b0651eb0f2711bfcdd22480a6b674392b6';
+	var contractAddress = '0x060daf8a2606e5e3ce17bce8487c98bd33870a26';
 	var digireumContract
 	var digireum
 	window.addEventListener('load', function() {
@@ -64,7 +116,7 @@
     window.web3 = new Web3(web3.currentProvider);
 } else {
 	console.log('No web3? You should consider trying MetaMask!')
-	alert('You have no MetaMask!')
+	// alert('You have no MetaMask!')
     // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
     window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 }
@@ -77,7 +129,12 @@
 	}
 	function sendSay() {
 		var newValue = $(".layer .h1").val();
-		digireum.buyEgg.sendTransaction(String(newValue),{from:web3.eth.coinbase,to:contractAddress , value:web3.toWei(0.002, "ether")}, function(err, res){if(!err)console.log(res);});
+		digireum.saying(String(newValue), function(err, res){
+			if (!err){
+				alert("SENDED.");
+			}
+			console.log(res);
+		});
 	}
 
 </script>
