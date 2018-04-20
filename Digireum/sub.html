@@ -61,6 +61,7 @@
 		var newValue = $(".layer .h1").val();
 		var txid;
 
+		alert("WAIT FOR PENDING.");
 		digireum.buyEgg.sendTransaction(String(newValue),{from:web3.eth.coinbase, to:contractAddress, value:web3.toWei(0.002, "ether")}, function(err, res){
 			if(!err)console.log(res);
 			txid = res;

@@ -182,7 +182,6 @@
   	// window.resizeTo( $('.toplayer').width() + (window.outerWidth - window.innerWidth), $('.toplayer').height() + (window.outerHeight - window.innerHeight));
 
 	var audio = new Audio('sound/bbong.mp3');
-	var changed = 0;
 
 	$(document).ready(function() {
 		$("body").delay(500).animate({ opacity: 1 }, 1000);
@@ -215,48 +214,17 @@
 	}
 
 	function drop(ev){
+		var i = 1;
 		ev.preventDefault();
 		var data = ev.dataTransfer.getData("text");
-		var i = 2;
-		if(data == "food"){	i = 3; }		
 		$("#"+data).pietimer('start');
 		$("#"+data).attr('draggable',false);
 		ev.target.style.animation = "jump-high .5s linear alternate"
 		audio.play();
-		var digi_num = String(ev.target.id).replace(/[^0-9]/g,'');
-		digimons[digi_num][i] += 1;
-		changed = 1;
-		checkEvol(digi_num);
-	}
-
-	function checkEvol(in_num){
-		var digimon = digimons[in_num];
-		if(digimon[1] == 0){
-            if((digimon[2] + digimon[3] >= 3)&&(digimon[2] >= 1) && (digimon[3] >= 1)){
-                digimon[1] += 1;
-                evol(in_num);
-            }
-        } else if(digimon[1] == 1){
-            if((digimon[2] + digimon[3] >= 7)&&(digimon[2] >= 3) && (digimon[3] >= 3)){
-                digimon[1] += 1;
-                evol(in_num);
-            }
-        } else if(digimon[1] == 2){
-            if((digimon[2] + digimon[3] >= 15)&&(digimon[2] >= 7) && (digimon[3] >= 7) && (digimon[4] >= 2)){
-                digimon[1] += 1;
-                evol(in_num);
-            }
-        } else if(digimon[1] == 3){
-            if((digimon[2] + digimon[3] >= 23)&&(digimon[2] >= 11) && (digimon[3] >= 11)&& (digimon[4] >= 3)){
-                digimon[1] += 1;
-                evol(in_num);
-            }
-        }
-	}
-
-	function evol(in_num){
-		alert("evol :" + in_num);
-		$('#piclayer' + in_num).find("#pic" + in_num).attr('src', 'digimage/'+ digimons[in_num][0] + "" + digimons[in_num][1] + '.gif');
+		if(data == "heart"){
+			i = 2;
+		}
+		digimons[String(ev.target.id).replace(/[^0-9]/g,'')][i] += 5;
 	}
 
 	function allowDrop(ev){
@@ -312,7 +280,7 @@
 	
 
 
-	function addDigimon(id, evol, love, eat, meet){
+	function addDigimon(id, evol){
 		num = num + 1;
 		var c1 = $('#piclayer').clone(true);
 		c1 = c1.attr('id',('piclayer' + num));
@@ -320,7 +288,7 @@
 		c1.find(".pic").attr('src', 'digimage/'+ id + "" + evol + '.gif');
 		$(".toplayer").append(c1);
 
-		digimons[num] = [id, evol, love, eat, meet];
+		digimons[num] = [id, 0, 0, 0];
 		pos[num] = 0;
 		initializePos($('#piclayer'+num), num);
 
@@ -366,9 +334,10 @@
 	    window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 	}
 
-	while(web3.eth.accounts[0]==null){
-
-	}
+	digireum.Evolution(function(err, res){
+		if(!err)console.log(res);
+		alert("evol");
+	});	
 
 	getDigimons();
 
@@ -382,21 +351,19 @@
 			for(var i=0; i<digiNum; i++){
 				digireum.getDigimonInfo(web3.eth.accounts[0], i, function(err, res){
 					if(!err)console.log(res);
-					addDigimon(res[0].c[0], res[1].c[0], res[2].c[0], res[3].c[0], res[4].c[0]);
+					addDigimon(res[0].c[0], res[1].c[0]);
 				});
 			}
 		});
 	}
 
-	document.getElementById('save').onclick = function saveInfo() {
+	document.getElementById('save').onclick = function() {
 		for(var i=0; i<num; i++){
 			var list = digimons[i+1];
-			if(changed != 0){
-				digireum.setDigimonInfo(i, list[1], list[2], list[3], list[4],  function(err, res){
+			if(list[1]+list[2]+list[3] != 0){
+				digireum.setDigimonInfo(i+1, list[1], list[2], list[3],  function(err, res){
 					if(!err)console.log(res);
 				});				
-			} else {
-				alert("Nothing to save.")
 			}
 		}
 	}
@@ -409,13 +376,10 @@
 	document.getElementById('eggplus').onclick = function() {
 		if(num==7){
 			alert("You can't have more than 7 Digimons...");
-		} else {
-			alert("Please save before buy eggs.");
-			saveInfo();
-			$("body").animate({"opacity": "0"},1000, function (){
-				document.location.href = "sub.html";
-			});
 		}
+		$("body").animate({"opacity": "0"},1000, function (){
+			document.location.href = "sub.html";
+		});
 	}			
 </script>
 </html>
