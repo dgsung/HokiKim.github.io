@@ -2,7 +2,11 @@
 <head>
 	<meta charset="UTF-8">
 	<style type="text/css">
-	body{background-color:#000000;}
+
+	body{
+		background-color:#000000;
+		opacity:0;
+	}
 	@font-face {
 		font-family: ArcaMajora3-Bold;
 		src: url("font/ArcaMajora3-Bold.otf") format("opentype");
@@ -12,6 +16,7 @@
 		src: url("font/Digivolve.otf") format("opentype");
 	}
 	.layer{
+		z-index: 1;
 		position:absolute;
 		top:50%;
 		left:50%;
@@ -66,6 +71,9 @@
 </head>
 <body>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<audio loop autoplay>
+		<source src="sound/volero.mp3" type="audio/mpeg">
+	</audio>
 	<p>
 		<br>
 		<div class="layer">
@@ -77,45 +85,34 @@
 		</div>
 	</p>
 </body>
+
 <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
-<!-- script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script -->
+<script src="metamask.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-	var contractAddress = '0x42ace1b0651eb0f2711bfcdd22480a6b674392b6';
-	var digireumContract
-	var digireum
-	window.addEventListener('load', function() {
-  // Checking if Web3 has been injected by the browser (Mist/MetaMask)
-  if (typeof web3 !== 'undefined') {
-    // Use Mist/MetaMask's provider
-    window.web3 = new Web3(web3.currentProvider);
-} else {
-	console.log('No web3? You should consider trying MetaMask!')
-    // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-    window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-}
-  // Now you can start your app & access web3 freely:
-  startApp();
-});
-	function startApp() {
-		digireumContract = web3.eth.contract([{"constant":false,"inputs":[{"name":"say","type":"string"}],"name":"buyEgg","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"name","type":"string"}],"name":"login","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getRandomTamer","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_num","type":"uint256"}],"name":"checkEvol","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_adr","type":"address"},{"name":"_num","type":"uint256"}],"name":"getDigimonInfo","outputs":[{"name":"","type":"uint8"},{"name":"","type":"uint8"},{"name":"","type":"uint8"},{"name":"","type":"uint8"},{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_name","type":"string"}],"name":"getTamerInfo","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"adr","type":"address"}],"name":"getDigimonNumByAdr","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_num","type":"uint8"},{"name":"_love","type":"uint8"},{"name":"_eat","type":"uint8"},{"name":"_meet","type":"uint8"}],"name":"setDigimonInfo","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getTotalDigimonNum","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_num","type":"uint8"}],"name":"initializer","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_num","type":"uint256"}],"name":"Evolution","type":"event"}]);
-		digireum = digireumContract.at(contractAddress);
-	}
+	$(document).ready(function() {
+		$("body").delay(500).animate({ opacity: 1 }, 1000);
+		$(".trans").fadeOut(0).slideUp(0);
+	});
+
 	function setValue() {
 		var newValue = $(".layer .h1").val();
 		var txid;
 		digireum.getTamerInfo(newValue, function(err, res){
 			if (!err){
 				if(res.c[0] == 1){
-					digireum.login.sendTransaction(newValue, function(err, res){
+					digireum.login(newValue, function(err, res){
 						if(!err)console.log(res);
 						txid = res;
 					});
-
+					
+					alert("WATING FOR PENDING");
 					var filter = web3.eth.filter('latest');
 					filter.watch(function(e, r){
 						web3.eth.getTransaction(txid, function(e, r){
 							if (r!=null && r.blockNumber > 0){
 								alert("NEW TAMER LOGGED.");
+								location.href="sub.html";
 								filter.stopWatching();
 							}
 						});
@@ -125,6 +122,10 @@
 					alert("IT'S NOT YOUR NAME.");
 				} else {
 					alert("LOGGED.");
+					$("body").animate({"opacity": "0"},1000, function (){
+						document.location.href = "sub2.html";
+						// window.open("sub2.html", '_blank', "pop", "width=1280, height=721, toolbar=1");
+					});
 				}
 				console.log(res);
 			}

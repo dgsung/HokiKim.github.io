@@ -2,7 +2,9 @@
 <head>
 	<style type="text/css">
 	body{
-		overflow:hidden
+		overflow:hidden;
+		opacity:0;
+		background-size: contain;
 	}
 	@font-face {
 		font-family: ArcaMajora3-Bold;
@@ -20,13 +22,87 @@
 		height:721;
 		top:50%;
 		left:50%; 
-  		transform:translate(-50%, -50%);
+		transform:translate(-50%, -50%);
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
 		-o-background-size: cover; background-size: cover;
+		overflow:hidden;
 	}
-	.layer{
-		width:200; 
+	.toplayer0{
+		background:url('background/sky.png') no-repeat;
+		background-size: contain;
+		position:absolute;
+		width:1280; 
+		height:721;
+		top:50%;
+		left:50%; 
+		transform:translate(-50%, -50%);
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover; background-size: cover;
+		overflow:hidden;
+	}
+	.sky{
+		background:url('background/sky.png') no-repeat;
+		position:absolute;
+		width:4000; 
+		height:721;
+		animation : swift 700s linear infinite alternate;
+	}
+	.save{
+		background:url('button/save.png') no-repeat;
+		position:absolute;
+		width:70; 
+		height:70;
+		left:5%;
+		top:10%;
+		transform:translate(-50%, -50%);
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover; background-size: cover;
+		cursor:pointer;
+	}
+	.eggplus{
+		background:url('button/egg.png') no-repeat;
+		position:absolute;
+		width:70; 
+		height:70;
+		left:5%;
+		top:22%;
+		transform:translate(-50%, -50%);
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover; background-size: cover;
+		cursor:pointer;
+	}
+	.heart{
+		background:url('button/heart.png') no-repeat;
+		position:absolute;
+		width:70; 
+		height:70;
+		right:0;
+		top:10%;
+		transform:translate(-50%, -50%);
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover; background-size: cover;
+		cursor:pointer;
+	}
+	.food{
+		background:url('button/food.png') no-repeat;
+		position:absolute;
+		width:70; 
+		height:70;
+		right:0;
+		top:22%;
+		transform:translate(-50%, -50%);
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover; background-size: cover;
+		cursor:pointer;
+	}
+	.piclayer{
+		width:20; 
 		height:200;		
 		/*border: 1px solid red;*/
 		position:absolute;
@@ -34,109 +110,276 @@
 		left:50%;
 		transform:translate(-50%, -50%);
 	}
-	.layer .digi {
+	.piclayer .pic {
 		/*border: 1px solid red;*/
 		position:absolute;
 		bottom:0;
 		transform: scale3d(-1.5, 1.5, 1.5);
-		stand .5s linear alternate infinite
+	}
+	.poo{	
+		/*border: 1px solid red;*/
+		position:absolute;
+		top:90%;
+		left:50%;
+		cursor:pointer;
+		transform:translate(-50%, -50%);
+		opacity:0;
+	}
+	@keyframes swift {
+		0%   {transform: translate3d(-68%,0,0);}
+		100% {transform: translate3d(0%,0,0);}
 	}
 	@keyframes jump-left {
-	  0%   {transform: translate3d(0,0,0) scale3d(1.5,1.5,1.5);}
-	  40%  {transform: translate3d(0,-20%,0) scale3d(1.5,1.5,1.5);}
-	  100% {transform: translate3d(0,-40%,0) scale3d(1.5,1.5,1.5);}
+		0%   {transform: translate3d(0,0,0) scale3d(1.5,1.5,1.5);}
+		40%  {transform: translate3d(0,-10%,0) scale3d(1.5,1.5,1.5);}
+		100% {transform: translate3d(0,-30%,0) scale3d(1.5,1.5,1.5);}
 	}
 	@keyframes jump-right {
-	  0%   {transform: translate3d(0,0,0) scale3d(-1,5,1.5,1.5);}
-	  40%  {transform: translate3d(0,-20%,0) scale3d(-1.5,1.5,1.5);}
-	  100% {transform: translate3d(0,-40%,0) scale3d(-1.5,1.5,1.5);}
+		0%   {transform: translate3d(0,0,0) scale3d(-1,5,1.5,1.5);}
+		40%  {transform: translate3d(0,-10%,0) scale3d(-1.5,1.5,1.5);}
+		100% {transform: translate3d(0,-30%,0) scale3d(-1.5,1.5,1.5);}
 	}
-	@keyframes stand {
-	  0%   {transform: translate3d(0,0,0) scale3d(-1,5,1.5,1.5);}
-	  40%  {transform: translate3d(0,0,0) scale3d(-1.5,1.5,1.5);}
-	  100% {transform: translate3d(0,0,0) scale3d(-1.5,1.5,1.5);}
+	@keyframes jump-high {
+		0%   {transform: translate3d(0,0,0) scale3d(-1,5,1.5,1.5);}
+		40%  {transform: translate3d(0,-120%,0) scale3d(-1.5,1.5,1.5);}
+		100% {transform: translate3d(0,-200%,0) scale3d(-1.5,1.5,1.5);}
 	}
 </style>
 </head>
 <body>
+	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="jquery.pietimer.js"></script>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<audio loop autoplay>
+		<source src="sound/bgsound.mp3" type="audio/mpeg">
+	</audio>
 	<p>
 		<br>
+		<div class="toplayer0">
+			<img class="sky"></img>
+		</div>
 		<div class="toplayer">
-			<div class="layer">
-				<img class="digi" id="digi" src="digimage/14.gif"/>
+			<div class = "save" id="save" clickable="true"></div>
+			<div class = "eggplus" id="eggplus" clickable="true"></div>
+			<div class = "heart" id="heart" draggable="true" ondragstart="drag(event)"></div>
+			<div class = "food" id="food" draggable="true" ondragstart="drag(event)"></div>
+			<div class="piclayer" id="piclayer">
+				<img class="pic" id="pic" ondrop="drop(event)" ondragover="allowDrop(event)" />
+			</div>
+			<div class="poolayer">
+				<img class="poo" id="poo" width="40" height="40" onclick="pooDel(this);" clickable="true" src="button/poo.png"/>
 			</div>
 		</div>
 	</p>
 </body>
 
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="./jquery.pietimer.js"></script>
 <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
-<!-- script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script -->
-
+<script src="metamask.js"></script>
 <script type="text/javascript">
-var interval = 2000;
-var walk = 60;
-var el = document.getElementById("digi");
-var pos = 0;
-function moveAuto(){
-	var random = Math.random();
-	if(random < 0.35 &&  pos >= -300){
-		el.style.animation="jump-left .5s linear alternate infinite"
-		moveLeft(interval);
-		pos = pos - walk
-	} else if(random > 0.65 && pos <= 300) {
-		moveRight(interval);
-		el.style.animation="jump-right .5s linear alternate infinite"
-		pos = pos + walk
-	} else {
-		el.style.animation="stand .5s linear alternate infinite"
+
+  	// window.resizeTo( $('.toplayer').width() + (window.outerWidth - window.innerWidth), $('.toplayer').height() + (window.outerHeight - window.innerHeight));
+
+	var audio = new Audio('sound/bbong.mp3');
+
+	$(document).ready(function() {
+		$("body").delay(500).animate({ opacity: 1 }, 1000);
+	});
+
+	$('#heart').pietimer({
+		seconds: 10,
+		color: 'rgba(0, 0, 0, 0.8)',
+		height: 70,
+		width: 70,
+		is_reversed: false
+	},
+	function(){
+		$('#heart').attr('draggable',true);
+	});
+
+	$('#food').pietimer({
+		seconds: 10,
+		color: 'rgba(0, 0, 0, 0.8)',
+		height: 70,
+		width: 70,
+		is_reversed: false
+	},
+	function(){
+		$('#food').attr('draggable',true);
+	});
+
+	function drag(ev){
+		ev.dataTransfer.setData("text", ev.target.id);
 	}
-}
 
-function moveRight(interval){
-	$(".layer").animate({left:"+=60"}, interval);
-}
+	function drop(ev){
+		var i = 1;
+		ev.preventDefault();
+		var data = ev.dataTransfer.getData("text");
+		$("#"+data).pietimer('start');
+		$("#"+data).attr('draggable',false);
+		ev.target.style.animation = "jump-high .5s linear alternate"
+		audio.play();
+		if(data == "heart"){
+			i = 2;
+		}
+		digimons[String(ev.target.id).replace(/[^0-9]/g,'')][i] += 5;
+	}
 
-function moveLeft(interval){
-	$(".layer").animate({left:"-=60"}, interval);
-}
+	function allowDrop(ev){
+		ev.preventDefault();
+	}
+	var interval = 4000;
+	var walk = 60;
+	var switcher = 1;
+	var pos = {};
+	var num = 0;
+	var digimons = {};
 
-st=setInterval("moveAuto()",interval);
+	function moveAuto(el, layer, iter, in_num){
+		var temp_num = in_num;
+		var random = Math.random();
+		if(random < 0.25 && pos[temp_num] >= -300){
+			el.style.transform = "translate3d(0,0,0) scale3d(1.5, 1.5, 1.5)"
+			el.style.animation = "jump-left .5s linear alternate infinite"
+			layer.animate({left:"-="+walk}, iter);
+			pos[temp_num] = pos[temp_num] - walk;
+		} else if(random > 0.75 && pos[temp_num] <= 300) {
+			el.style.transform = "translate3d(0,0,0) scale3d(-1.5, 1.5, 1.5)"
+			el.style.animation = "jump-right .5s linear alternate infinite"
+			layer.animate({left:"+="+walk}, iter);
+			pos[temp_num] = pos[temp_num] + walk;
+		} else {
+			el.style.animation = "";
+		}
+	}
 
-</script>
+	function initializePos(layer, num){
+		var randpos = Math.floor(walk * Math.random() * 5);
+		switcher = switcher*(-1);
+		pos[num] = switcher * randpos;
+		if(switcher == 1){
+			layer.animate({left:"+="+randpos}, 0);
+		} else {
+			layer.animate({left:"-="+randpos}, 0);
+		}
+		
+	}
 
-<script>
-	var contractAddress = '0x060daf8a2606e5e3ce17bce8487c98bd33870a26';
-	var digireumContract
-	var digireum
+	function randInterval(){
+		return interval + 1000*Math.floor((Math.random()*5-3));
+	}
+
+	// generatePoo();
+
+	// function generatePoo(){
+	// 	var c1 = $('#poolayer').clone(true);
+	// 	$(".toplayer").append(c1);
+	// }
+	
+
+
+	function addDigimon(id, evol){
+		num = num + 1;
+		var c1 = $('#piclayer').clone(true);
+		c1 = c1.attr('id',('piclayer' + num));
+		c1.find(".pic").attr('id', ('pic' + num));
+		c1.find(".pic").attr('src', 'digimage/'+ id + "" + evol + '.gif');
+		$(".toplayer").append(c1);
+
+		digimons[num] = [id, 0, 0, 0];
+		pos[num] = 0;
+		initializePos($('#piclayer'+num), num);
+
+		if(num==1){		
+			iter = randInterval();
+			setInterval("moveAuto(document.getElementById('pic'+1), $('#piclayer'+1), iter, 1)", iter);
+		}
+		if(num==2){		
+			iter = randInterval();
+			setInterval("moveAuto(document.getElementById('pic'+2), $('#piclayer'+2), iter, 2)", iter);
+		}
+		if(num==3){		
+			iter = randInterval();
+			setInterval("moveAuto(document.getElementById('pic'+3), $('#piclayer'+3), iter, 3)", iter);
+		}
+		if(num==4){		
+			iter = randInterval();
+			setInterval("moveAuto(document.getElementById('pic'+4), $('#piclayer'+4), iter, 4)", iter);
+		}
+		if(num==5){		
+			iter = randInterval();
+			setInterval("moveAuto(document.getElementById('pic'+5), $('#piclayer'+5), iter, 5)", iter);
+		}
+		if(num==6){		
+			iter = randInterval();
+			setInterval("moveAuto(document.getElementById('pic'+6), $('#piclayer'+6), iter, 6)", iter);
+		}
+		if(num==7){		
+			iter = randInterval();
+			setInterval("moveAuto(document.getElementById('pic'+7), $('#piclayer'+7), iter, 7)", iter);
+		}
+	}
+
 	window.addEventListener('load', function() {
   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
   if (typeof web3 !== 'undefined') {
-    // Use Mist/MetaMask's provider
-    window.web3 = new Web3(web3.currentProvider);
+	// Use Mist/MetaMask's provider
+	window.web3 = new Web3(web3.currentProvider);
 } else {
+
 	console.log('No web3? You should consider trying MetaMask!')
-	// alert('You have no MetaMask!')
-    // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-    window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-}
-  // Now you can start your app & access web3 freely:
-  startApp();
-});
-	function startApp() {
-		digireumContract = web3.eth.contract([{"constant":false,"inputs":[{"name":"name","type":"string"}],"name":"login","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"getRandomTamer","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"num","type":"uint256"}],"name":"initializer","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"in_name","type":"string"}],"name":"get","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"say","type":"string"}],"name":"saying","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getDigimonNum","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}]);
-		digireum = digireumContract.at(contractAddress);
+	    // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+	    window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 	}
-	function sendSay() {
-		var newValue = $(".layer .h1").val();
-		digireum.saying(String(newValue), function(err, res){
-			if (!err){
-				alert("SENDED.");
+
+	digireum.Evolution(function(err, res){
+		if(!err)console.log(res);
+		alert("evol");
+	});	
+
+	getDigimons();
+
+});
+
+	function getDigimons(){
+		digireum.getDigimonNumByAdr(web3.eth.accounts[0], function(err, res){
+			if(!err)console.log(res);
+			digiNum = res.c[0];
+
+			for(var i=0; i<digiNum; i++){
+				digireum.getDigimonInfo(web3.eth.accounts[0], i, function(err, res){
+					if(!err)console.log(res);
+					addDigimon(res[0].c[0], res[1].c[0]);
+				});
 			}
-			console.log(res);
 		});
 	}
 
-</script>
+	document.getElementById('save').onclick = function() {
+		for(var i=0; i<num; i++){
+			var list = digimons[i+1];
+			if(list[1]+list[2]+list[3] != 0){
+				digireum.setDigimonInfo(i+1, list[1], list[2], list[3],  function(err, res){
+					if(!err)console.log(res);
+				});				
+			}
+		}
+	}
 
+	function pooDel(obj) {
+		var tr = obj.parentNode;
+		tr.parentNode.removeChild(tr);
+	}
+
+	document.getElementById('eggplus').onclick = function() {
+		if(num==7){
+			alert("You can't have more than 7 Digimons...");
+		}
+		$("body").animate({"opacity": "0"},1000, function (){
+			document.location.href = "sub.html";
+		});
+	}			
+</script>
 </html>
