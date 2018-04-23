@@ -184,6 +184,13 @@
 	var audio = new Audio('sound/bbong.mp3');
 	var changed = 0;
 
+	$(document).ready(function($) {
+	    $(window).on("beforeunload", function () {
+	        if (changed == 1) return "You didn't save. REALLY?";
+	    });
+	    
+	});
+
 	$(document).ready(function() {
 		$("body").delay(500).animate({ opacity: 1 }, 1000);
 	});
@@ -310,8 +317,6 @@
 	// 	$(".toplayer").append(c1);
 	// }
 	
-
-
 	function addDigimon(id, evol, love, eat, meet){
 		num = num + 1;
 		var c1 = $('#piclayer').clone(true);
@@ -388,13 +393,14 @@
 		});
 	}
 
-	document.getElementById('save').onclick = function saveInfo() {
+	document.getElementById('save').onclick = function {
 		for(var i=0; i<num; i++){
 			var list = digimons[i+1];
 			if(changed != 0){
 				digireum.setDigimonInfo(i, list[1], list[2], list[3], list[4],  function(err, res){
 					if(!err)console.log(res);
-				});				
+				});
+				changed = 0;	
 			} else {
 				alert("Nothing to save.")
 			}
@@ -410,8 +416,6 @@
 		if(num==7){
 			alert("You can't have more than 7 Digimons...");
 		} else {
-			alert("Please save before buy eggs.");
-			saveInfo();
 			$("body").animate({"opacity": "0"},1000, function (){
 				document.location.href = "sub.html";
 			});
