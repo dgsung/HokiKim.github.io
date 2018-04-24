@@ -159,7 +159,7 @@
 </style>
 </head>
 <body>
-	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script src="jquery.pietimer.js"></script>
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<audio loop autoplay>
@@ -185,7 +185,7 @@
 	</p>
 </body>
 
-<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="./jquery.pietimer.js"></script>
 <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
 <script src="metamask.js"></script>
@@ -236,26 +236,27 @@
 	function drop(ev){
 		ev.preventDefault();
 		var data = ev.dataTransfer.getData("text");
+		var digi_num = String(ev.target.id).replace(/[^0-9]/g,'');
+		var	i = 3;
 		if(data == "food"){
-			var	i = 3;
 			$("#"+data).pietimer('start');
 			$("#"+data).attr('draggable',false);
 			ev.target.style.animation = "jump-high .5s linear alternate"
 			audio.play();
-			var digi_num = String(ev.target.id).replace(/[^0-9]/g,'');
 			digimons[digi_num][i] += 1;
 			changed = 1;
 			checkEvol(digi_num);
 		} else if(data == "heart"){
-			var i = 2;
+			i = 2;
 			$("#"+data).pietimer('start');
 			$("#"+data).attr('draggable',false);
 			ev.target.style.animation = "jump-high .5s linear alternate"
 			audio.play();
-			var digi_num = String(ev.target.id).replace(/[^0-9]/g,'');
 			digimons[digi_num][i] += 1;
 			changed = 1;
 			checkEvol(digi_num);
+		} else {
+			alert("Greedy..");
 		}
 	}
 
