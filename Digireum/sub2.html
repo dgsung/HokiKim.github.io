@@ -394,16 +394,16 @@
 	}
 
 	document.getElementById('save').onclick = function() {
-		for(var i=0; i<num; i++){
-			var list = digimons[i+1];
-			if(changed != 0){
-				digireum.setDigimonInfo(i, list[1], list[2], list[3], list[4],  function(err, res){
-					if(!err)console.log(res);
-				});
-				changed = 0;	
-			} else {
-				alert("Nothing to save.")
-			}
+		if(changed != 0){
+			for(var i=0; i<num; i++){
+				var list = digimons[i+1];
+					digireum.setDigimonInfo(i, list[1], list[2], list[3], list[4],  function(err, res){
+						if(!err)console.log(res);
+					});
+					changed = 0;	
+				} 
+		} else {
+			alert("Nothing to save.")
 		}
 	}
 
