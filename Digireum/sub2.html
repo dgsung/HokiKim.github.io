@@ -236,16 +236,27 @@
 	function drop(ev){
 		ev.preventDefault();
 		var data = ev.dataTransfer.getData("text");
-		var i = 2;
-		if(data == "food"){	i = 3; }		
-		$("#"+data).pietimer('start');
-		$("#"+data).attr('draggable',false);
-		ev.target.style.animation = "jump-high .5s linear alternate"
-		audio.play();
-		var digi_num = String(ev.target.id).replace(/[^0-9]/g,'');
-		digimons[digi_num][i] += 1;
-		changed = 1;
-		checkEvol(digi_num);
+		if(data == "food"){
+			var	i = 3;
+			$("#"+data).pietimer('start');
+			$("#"+data).attr('draggable',false);
+			ev.target.style.animation = "jump-high .5s linear alternate"
+			audio.play();
+			var digi_num = String(ev.target.id).replace(/[^0-9]/g,'');
+			digimons[digi_num][i] += 1;
+			changed = 1;
+			checkEvol(digi_num);
+		} else if(data == "heart"){
+			var i = 2;
+			$("#"+data).pietimer('start');
+			$("#"+data).attr('draggable',false);
+			ev.target.style.animation = "jump-high .5s linear alternate"
+			audio.play();
+			var digi_num = String(ev.target.id).replace(/[^0-9]/g,'');
+			digimons[digi_num][i] += 1;
+			changed = 1;
+			checkEvol(digi_num);
+		}
 	}
 
 	function checkEvol(in_num){
